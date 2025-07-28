@@ -1,0 +1,99 @@
+version: '3'
+
+vars:
+  PYTHON_VERSION: 3.12.9
+
+tasks:
+  default:
+    desc: "Show available tasks"
+    cmds:
+      - task --list
+
+  setup:
+    desc: "Set up the Python environment and install dependencies"
+    cmds:
+      - pyenv install -s {{.PYTHON_VERSION}}
+      - pyenv local {{.PYTHON_VERSION}}
+      - poetry install
+      - poetry config virtualenvs.in-project true
+      - 'echo "Setup complete! Activate with: source .venv/bin/activate"'
+
+  run:
+    desc: "Run all examples"
+    cmds:
+      - poetry run python src/main.py
+
+  run-prompt-engineering:
+    desc: "Run prompt engineering examples"
+    cmds:
+      - poetry run python src/prompt_engineering.py
+
+  run-few-shot-learning:
+    desc: "Run few shot learning examples"
+    cmds:
+      - poetry run python src/few_shot_learning.py
+
+  run-chain-of-thought:
+    desc: "Run chain of thought examples"
+    cmds:
+      - poetry run python src/chain_of_thought.py
+
+  run-data-curation:
+    desc: "Run data curation examples"
+    cmds:
+      - poetry run python src/data_curation.py
+
+  run-tokenization:
+    desc: "Run tokenization examples"
+    cmds:
+      - poetry run python src/tokenization.py
+
+  run-model-configuration:
+    desc: "Run model configuration examples"
+    cmds:
+      - poetry run python src/model_configuration.py
+
+  run-training:
+    desc: "Run training workflow examples"
+    cmds:
+      - poetry run python src/training_workflow.py
+
+  run-constitutional-ai:
+    desc: "Run constitutional AI examples"
+    cmds:
+      - poetry run python src/constitutional_ai.py
+
+  notebooks:
+    desc: "Run the tutorial notebook"
+    cmds:
+      - poetry run jupyter notebook notebooks/
+
+  notebook:
+    desc: "Run the tutorial notebook"
+    cmds:
+      - poetry run jupyter notebook notebooks/tutorial.ipynb
+
+  notebook-lab:
+    desc: "Run the tutorial notebook with JupyterLab"
+    cmds:
+      - poetry run jupyter lab notebooks/tutorial.ipynb
+
+  test:
+    desc: "Run all tests"
+    cmds:
+      - poetry run pytest tests/ -v
+
+  format:
+    desc: "Format code with Black and Ruff"
+    cmds:
+      - poetry run black src/ tests/
+      - poetry run ruff check --fix src/ tests/
+
+  clean:
+    desc: "Clean up generated files"
+    cmds:
+      - find . -type d -name "__pycache__" -exec rm -rf {} +
+      - find . -type f -name "*.pyc" -delete
+      - rm -rf .pytest_cache
+      - rm -rf .ruff_cache
+      - rm -rf .mypy_cache
