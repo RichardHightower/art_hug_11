@@ -32,3 +32,5 @@ data/
 models/
 *.log
 .cache/
+results/
+results_fp16/

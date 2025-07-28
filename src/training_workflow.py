@@ -77,8 +77,8 @@ def basic_training_setup():
         num_train_epochs=1,
         warmup_steps=10,
         logging_dir='./logs',
+        load_best_model_at_end=True,  # Required for early stopping
         report_to=[],  # Disable reporting for compatibility
-        load_best_model_at_end=False,  # Simplify for demo
     )
     
     try:
@@ -89,6 +89,7 @@ def basic_training_setup():
             train_dataset=split_dataset["train"],
             eval_dataset=split_dataset["test"],
             data_collator=data_collator,
+            tokenizer=tokenizer,
         )
     except TypeError as e:
         print(f"Note: Trainer initialization issue (likely version mismatch): {e}")
@@ -258,15 +259,16 @@ def error_analysis():
         trainer.args.max_steps = 10
         trainer.train()
         
-        # Save the model
+        # Save the model and tokenizer
         output_dir = "./results/checkpoint-final"
         trainer.save_model(output_dir)
+        trainer.tokenizer.save_pretrained(output_dir)
         
         # Load for generation
         text_generator = pipeline(
             "text-generation",
             model=output_dir,
-            tokenizer=trainer.tokenizer,
+            tokenizer=output_dir,
             device=0 if get_device() == "cuda" else -1
         )
     
