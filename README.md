@@ -76,7 +76,10 @@ For the best learning experience, start with the comprehensive tutorial:
 # 1. Set up the environment
 task setup
 
-# 2. Start Jupyter
+
+task run # 2. Run all examples
+
+# 3. Start Jupyter
 jupyter lab notebooks/tutorial.ipynb
 ```
 
