@@ -992,6 +992,24 @@ files = [
 tests = ["asttokens (>=2.1.0)", "coverage", "coverage-enable-subprocess", "ipython", "littleutils", "pytest", "rich ; python_version >= \"3.11\""]
 
 [[package]]
+name = "fairlearn"
+version = "0.12.0"
+description = "A Python package to assess and improve fairness of machine learning models."
+optional = false
+python-versions = ">=3.8"
+groups = ["main"]
+files = [
+    {file = "fairlearn-0.12.0-py3-none-any.whl", hash = "sha256:bcebeec54a7c35bc2ff0ce6e5cb123b959ad46ff8f9032d9cea9906f604dfaf4"},
+    {file = "fairlearn-0.12.0.tar.gz", hash = "sha256:bd3d79a3c0e4b35a9732278e20b6be80cbd6c47cf560326ffe9aaf0b8077e76f"},
+]
+
+[package.dependencies]
+numpy = ">=1.24.4"
+pandas = ">=2.0.3"
+scikit-learn = ">=1.2.1"
+scipy = ">=1.9.3"
+
+[[package]]
 name = "fastjsonschema"
 version = "2.21.1"
 description = "Fastest Python implementation of JSON schema"
@@ -5779,4 +5797,4 @@ propcache = ">=0.2.1"
 [metadata]
 lock-version = "2.1"
 python-versions = "^3.12"
-content-hash = "3ebbc2a471fa7c97b4173bdcca8ea9e413481b51f0989c4e05a2cc087a0b3435"
+content-hash = "3723a32aa894059c96c5476a3104df526b6049ba4b09bcf9b03733c0d9412573"
